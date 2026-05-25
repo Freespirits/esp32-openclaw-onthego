@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -39,3 +40,14 @@ jobs:
           target: ${{ matrix.target }}
           path: ${{ matrix.path }}
           command: idf.py reconfigure && ninja -C build -j2
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}-${{ matrix.target }}
+          path: |
+            ${{ matrix.path }}/build/*.bin
+            ${{ matrix.path }}/build/bootloader/bootloader.bin
+            ${{ matrix.path }}/build/partition_table/partition-table.bin
+            ${{ matrix.path }}/build/flasher_args.json
+          if-no-files-found: warn
