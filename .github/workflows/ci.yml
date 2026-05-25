@@ -18,7 +18,7 @@ jobs:
       matrix:
         include:
           - name: component-unity-tests
-            path: components/esp-openclaw-node/test_apps/esp_openclaw_node_unity_tests
+            path: components/esp-mochi-node/test_apps/esp_mochi_node_unity_tests
             target: esp32s3
           - name: esp32-node
             path: examples/esp32-node

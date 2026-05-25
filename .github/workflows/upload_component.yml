@@ -1,4 +1,4 @@
-name: Push esp-openclaw-node to IDF Component Registry
+name: Push esp-mochi-node to IDF Component Registry
 
 on:
   push:
@@ -13,9 +13,9 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: Upload esp-openclaw-node to IDF Component Registry
+      - name: Upload esp-mochi-node to IDF Component Registry
         uses: espressif/upload-components-ci-action@v2
         with:
-          components: "esp-openclaw-node:components/esp-openclaw-node"
+          components: "esp-mochi-node:components/esp-mochi-node"
           namespace: "espressif"
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
