@@ -15,19 +15,19 @@ This directory contains the example applications in this repository and the shar
 
 ## Naming Convention
 
-- `*_node_cmd.c` OpenClaw Node command handlers and the function that registers those commands with the node.
+- `*_node_cmd.c` Mochi Node command handlers and the function that registers those commands with the node.
 - `*_repl_cmd.c` REPL command handlers and the function that registers those commands with the console.
 - Other `.c` files Helper code, board setup, runtime services, or the main application entry point.
 
-The public `esp_openclaw_node` API passes command parameters as raw JSON text. The examples parse that text with `cJSON` explicitly inside the example sources.
+The public `esp_mochi_node` API passes command parameters as raw JSON text. The examples parse that text with `cJSON` explicitly inside the example sources.
 
 ## Common Directory
 
 The shared files under `common/` are split the same way:
 
-- Shared device and Wi-Fi node commands: [esp_openclaw_node_common_device_node_cmd.c](./common/esp_openclaw_node_common_device_node_cmd.c)
-- Shared JSON parsing and payload helpers: [esp_openclaw_node_example_json.c](./common/esp_openclaw_node_example_json.c)
-- Shared REPL startup: [esp_openclaw_node_example_repl.c](./common/esp_openclaw_node_example_repl.c)
-- Shared REPL commands such as `status`, `wifi`, `gateway`, and `reboot`: [esp_openclaw_node_example_repl_cmd.c](./common/esp_openclaw_node_example_repl_cmd.c)
-- Shared saved-session reconnect helper: [esp_openclaw_node_example_saved_session_reconnect.c](./common/esp_openclaw_node_example_saved_session_reconnect.c)
-- Shared Wi-Fi helpers: [esp_openclaw_node_wifi.c](./common/esp_openclaw_node_wifi.c)
+- Shared device and Wi-Fi node commands: [esp_mochi_node_common_device_node_cmd.c](./common/esp_mochi_node_common_device_node_cmd.c)
+- Shared JSON parsing and payload helpers: [esp_mochi_node_example_json.c](./common/esp_mochi_node_example_json.c)
+- Shared REPL startup: [esp_mochi_node_example_repl.c](./common/esp_mochi_node_example_repl.c)
+- Shared REPL commands such as `status`, `wifi`, `gateway`, and `reboot`: [esp_mochi_node_example_repl_cmd.c](./common/esp_mochi_node_example_repl_cmd.c)
+- Shared saved-session reconnect helper: [esp_mochi_node_example_saved_session_reconnect.c](./common/esp_mochi_node_example_saved_session_reconnect.c)
+- Shared Wi-Fi helpers: [esp_mochi_node_wifi.c](./common/esp_mochi_node_wifi.c)

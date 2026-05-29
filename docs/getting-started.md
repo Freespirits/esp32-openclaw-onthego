@@ -1,16 +1,16 @@
 # Getting Started
 
-Use this guide to connect an ESP32 board from this repository to an existing OpenClaw gateway.
+Use this guide to connect an ESP32 board from this repository to an existing Mochi gateway.
 
 ## What You Need
 
-- OpenClaw installed and `openclaw` available on `PATH`
-- An OpenClaw gateway the board can reach
+- Mochi installed and `mochi` available on `PATH`
+- An Mochi gateway the board can reach
 - ESP-IDF `5.x`
 - An ESP32 board with Wi-Fi
 - A serial connection or board-specific flashing path, depending on the example
 
-Commands below assume the default OpenClaw install. If you use a named profile, add `--profile <profile>` to the `openclaw` commands.
+Commands below assume the default Mochi install. If you use a named profile, add `--profile <profile>` to the `mochi` commands.
 
 ## Choose An Example
 
@@ -24,10 +24,10 @@ If the board will connect over Wi-Fi to a gateway running on another machine, se
 Before pairing a board, set `gateway.nodes.allowCommands` for the example you are using. Each example README lists the commands to allow.
 
 ```bash
-openclaw config set gateway.bind lan
-openclaw config set gateway.nodes.allowCommands '<json-array-from-example>' --strict-json
-openclaw gateway restart
-openclaw gateway status --probe --json
+mochi config set gateway.bind lan
+mochi config set gateway.nodes.allowCommands '<json-array-from-example>' --strict-json
+mochi gateway restart
+mochi gateway status --probe --json
 ```
 
 If the gateway stays on loopback, the board cannot reach it over Wi-Fi. If the gateway does not allow the example's commands, the node can connect and still show `commands: []`.
@@ -52,7 +52,7 @@ commands described below.
 Generate one on the gateway host:
 
 ```bash
-openclaw qr \
+mochi qr \
   --url ws://<gateway-host-ip>:<gateway-port> \
   --setup-code-only
 ```
@@ -74,10 +74,10 @@ If the installed gateway already resolves the correct LAN URL, you can omit `--u
 After flashing, open the serial console for the board and use the REPL:
 
 ```text
-openclaw> status
-openclaw> wifi set <ssid> <passphrase>
-openclaw> gateway setup-code <setup-code>
-openclaw> status
+mochi> status
+mochi> wifi set <ssid> <passphrase>
+mochi> gateway setup-code <setup-code>
+mochi> status
 ```
 
 Each example README calls out the console path for that board and the commands it exposes after pairing.
@@ -104,8 +104,8 @@ exists on the board.
 ## Check The Node From The Gateway
 
 ```bash
-openclaw nodes status --json
-openclaw nodes invoke --node <node-id> --command device.info --json
+mochi nodes status --json
+mochi nodes invoke --node <node-id> --command device.info --json
 ```
 
 Then run one of the commands from the README for the board you are using.
@@ -115,5 +115,5 @@ If pairing did not complete as expected, use [Troubleshooting](./troubleshooting
 ## Troubleshooting And Reference
 
 - [Troubleshooting](./troubleshooting.md)
-- [Component README](../components/esp-openclaw-node/README.md)
+- [Component README](../components/esp-mochi-node/README.md)
 

@@ -2,7 +2,7 @@
 
 This guide covers common setup problems for the examples in this repository.
 
-Commands below assume the default OpenClaw install. If you use a named profile, add `--profile <profile>` to the `openclaw` commands.
+Commands below assume the default Mochi install. If you use a named profile, add `--profile <profile>` to the `mochi` commands.
 
 ## Node Shows Capabilities but `commands: []`
 
@@ -15,8 +15,8 @@ This usually means one of three things:
 Make sure the gateway includes the allowlist from the example README, then restart it:
 
 ```bash
-openclaw config set gateway.nodes.allowCommands '<json-array-from-example>' --strict-json
-openclaw gateway restart
+mochi config set gateway.nodes.allowCommands '<json-array-from-example>' --strict-json
+mochi gateway restart
 ```
 
 If the board already has a saved reconnect session, it should reconnect
@@ -26,7 +26,7 @@ connection attempt from the board or reboot it.
 When you check status, use the live row:
 
 ```bash
-openclaw nodes status --json
+mochi nodes status --json
 ```
 
 Look for:
@@ -48,7 +48,7 @@ Use this recovery sequence:
 1. Generate a fresh setup code:
 
 ```bash
-openclaw qr \
+mochi qr \
   --url ws://<gateway-host-ip>:<gateway-port> \
   --setup-code-only
 ```
@@ -78,7 +78,7 @@ gateway setup-code <setup-code>
 does not require a second `gateway connect`. If Wi-Fi is still associating, the
 REPL waits for the board to obtain an IP before it submits that attempt.
 
-## Node Does Not Show Up in `openclaw nodes status`
+## Node Does Not Show Up in `mochi nodes status`
 
 Check both sides:
 
@@ -94,8 +94,8 @@ Use `wifi set <ssid>` instead if the network is open.
 On the gateway host:
 
 ```bash
-openclaw gateway status --probe --json
-openclaw nodes status --json
+mochi gateway status --probe --json
+mochi nodes status --json
 ```
 
 If the board is not associated to Wi-Fi yet, fix that first. If the board is on
@@ -108,19 +108,19 @@ embedded in the setup code or passed to `gateway token`, `gateway password`, or
 Fresh setup-code pairing should not normally require extra approval commands. If the gateway still leaves a pending device or node request, inspect and approve it as a fallback:
 
 ```bash
-openclaw devices approve --latest
-openclaw nodes pending --json
-openclaw nodes approve <request-id> --json
+mochi devices approve --latest
+mochi nodes pending --json
+mochi nodes approve <request-id> --json
 ```
 
 After approval, a board that already has a saved reconnect session should
 reconnect automatically once Wi-Fi and the gateway are back. Otherwise request
 another connection attempt or reboot the board.
 
-`openclaw devices` and `openclaw nodes` do different jobs:
+`mochi devices` and `mochi nodes` do different jobs:
 
-- `openclaw devices` works with device pairing records
-- `openclaw nodes` works with the live node list and the commands available on each node
+- `mochi devices` works with device pairing records
+- `mochi nodes` works with the live node list and the commands available on each node
 
 ## Reset Saved State on the Board
 

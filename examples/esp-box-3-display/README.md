@@ -1,12 +1,12 @@
 # ESP-BOX-3 Display Example
 
-This example runs an ESP-BOX-3 as an OpenClaw Node with display commands for the built-in screen.
+This example runs an ESP-BOX-3 as an Mochi Node with display commands for the built-in screen.
 
-<a href="../../docs/assets/openclaw-gateway-esp-box-3-message-flow.png">
-  <img src="../../docs/assets/openclaw-gateway-esp-box-3-message-flow.png" alt="OpenClaw Gateway to ESP-BOX-3 message flow" width="900">
+<a href="../../docs/assets/mochi-gateway-esp-box-3-message-flow.png">
+  <img src="../../docs/assets/mochi-gateway-esp-box-3-message-flow.png" alt="Mochi Gateway to ESP-BOX-3 message flow" width="900">
 </a>
 
-Commands below assume the default OpenClaw install. If you use a named profile, add `--profile <profile>` to the `openclaw` commands.
+Commands below assume the default Mochi install. If you use a named profile, add `--profile <profile>` to the `mochi` commands.
 
 ## What This Example Exposes
 
@@ -34,7 +34,7 @@ Sample payload:
 ```json
 {
   "heading": "Hello",
-  "text": "OpenClaw is driving the ESP-BOX-3 display."
+  "text": "Mochi is driving the ESP-BOX-3 display."
 }
 ```
 
@@ -49,8 +49,8 @@ Allow this example's commands before pairing the board:
 Warning: this command replaces the existing `gateway.nodes.allowCommands` value in the active profile.
 
 ```bash
-openclaw config set gateway.bind lan
-openclaw config set gateway.nodes.allowCommands '[
+mochi config set gateway.bind lan
+mochi config set gateway.nodes.allowCommands '[
   "device.info",
   "device.status",
   "wifi.status",
@@ -58,11 +58,11 @@ openclaw config set gateway.nodes.allowCommands '[
   "display.status"
 ]' --strict-json
 
-openclaw gateway restart
-openclaw gateway status --probe --json
+mochi gateway restart
+mochi gateway status --probe --json
 ```
 
-These steps start from an existing OpenClaw gateway that the board can reach on your LAN.
+These steps start from an existing Mochi gateway that the board can reach on your LAN.
 
 ## Build
 
@@ -120,7 +120,7 @@ Start with these commands:
 Generate a setup code on the gateway host:
 
 ```bash
-openclaw qr \
+mochi qr \
   --url ws://<gateway-host-ip>:<gateway-port> \
   --setup-code-only
 ```
@@ -130,10 +130,10 @@ The setup code contains a short-lived `bootstrapToken`, not the gateway's shared
 Bring the board online from the serial REPL:
 
 ```text
-openclaw> status
-openclaw> wifi set <ssid> <passphrase>
-openclaw> gateway setup-code <setup-code>
-openclaw> status
+mochi> status
+mochi> wifi set <ssid> <passphrase>
+mochi> gateway setup-code <setup-code>
+mochi> status
 ```
 
 `gateway setup-code <setup-code>` already requests the connection attempt. If
@@ -145,9 +145,9 @@ you want to trigger that saved-session reconnect immediately.
 Then verify the node from the gateway host:
 
 ```bash
-openclaw nodes status --json
-openclaw nodes invoke --node <node-id> --command device.info --json
-openclaw nodes invoke --node <node-id> --command display.status --json
+mochi nodes status --json
+mochi nodes invoke --node <node-id> --command device.info --json
+mochi nodes invoke --node <node-id> --command display.status --json
 ```
 
 If pairing did not complete as expected, use [Troubleshooting](../../docs/troubleshooting.md).
@@ -157,19 +157,19 @@ If pairing did not complete as expected, use [Troubleshooting](../../docs/troubl
 Get basic information:
 
 ```bash
-openclaw nodes invoke --node <node-id> --command device.info --json
-openclaw nodes invoke --node <node-id> --command device.status --json
-openclaw nodes invoke --node <node-id> --command wifi.status --json
-openclaw nodes invoke --node <node-id> --command display.status --json
+mochi nodes invoke --node <node-id> --command device.info --json
+mochi nodes invoke --node <node-id> --command device.status --json
+mochi nodes invoke --node <node-id> --command wifi.status --json
+mochi nodes invoke --node <node-id> --command display.status --json
 ```
 
 Update the display:
 
 ```bash
-openclaw nodes invoke \
+mochi nodes invoke \
   --node <node-id> \
   --command display.show \
-  --params '{"heading":"Hello","text":"OpenClaw is driving the ESP-BOX-3 display."}' \
+  --params '{"heading":"Hello","text":"Mochi is driving the ESP-BOX-3 display."}' \
   --json
 ```
 
@@ -206,9 +206,9 @@ Useful when you want to test more than the standard setup-code flow:
 ## Troubleshooting And Reference
 
 - [Troubleshooting](../../docs/troubleshooting.md)
-- [Component README](../../components/esp-openclaw-node/README.md)
+- [Component README](../../components/esp-mochi-node/README.md)
 
 ## Notes
 
 - The `esp32s3` target is fixed for this example.
-- The node display name is `OpenClaw ESP-BOX-3`.
+- The node display name is `Mochi ESP-BOX-3`.
